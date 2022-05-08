@@ -1309,7 +1309,7 @@ PATH_TO_FEATURES_PLAYER = r'D:\\features_player'
 # датасет
 PATH_TO_DATASET = 'dataset.pickle'
 # таблица с прогнозами
-PATH_TO_FORECAST = 'forecast_v2.txt'
+PATH_TO_FORECAST = 'forecast.txt'
 
 if __name__ =='__main__':
     # модель
