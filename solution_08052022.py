@@ -51,7 +51,8 @@ class CsgoOutcomePredictor():
         return L_COLLECTION
 
     def add_global_info(self, d_game):
-
+        
+        # информация об игре        
         d = {}
 
         d['id'] = d_game['id']
@@ -72,16 +73,20 @@ class CsgoOutcomePredictor():
         # идентификаторы актуальных карт
         l_map2use = [1, 2, 6, 7, 8, 20, 31]
         # ключи со статистикой игрока
-        l_stat_keys = ['adr', 'assists', 'deaths', 'first_kills_diff', 'flash_assists', 
-                    'headshots', 'k_d_diff', 'kast', 'kills', 'rating']
+        l_stat_keys = [
+            'adr', 'assists', 'deaths', 'first_kills_diff', 'flash_assists', 
+            'headshots', 'k_d_diff', 'kast', 'kills', 'rating'
+        ]
 
         # информация об игре
         d_info = self.add_global_info(d_game)
         
         if d_info['map_id'] in l_map2use:  
-
+            
+            # проверка валидности раундов
             d_r1 = d_game['rounds'][0]
-            if d_r1['round']==1:
+            total = len(d_game['rounds'])
+            if (d_r1['round']==1)&(total>=16):
                 
                 # информация о раундах
                 df_rounds = pd.DataFrame.from_records(d_game['rounds'])
@@ -799,7 +804,7 @@ class CsgoOutcomePredictor():
         SEED=13
         N_PERM_ITER = 20
         TEST_SIZE, HOLD_SIZE = .1, .2
-        EARLY_STOPPING_ROUNDS = 20
+        EARLY_STOPPING_ROUNDS = 100
         
         dataset = pd.read_pickle(PATH_TO_DATASET)
         print('> dataset shape: {}'.format(dataset.shape))
@@ -1319,54 +1324,3 @@ if __name__ =='__main__':
     )
     # предсказания
     csgo_ml.transform(PATH_TO_FORECAST)
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-# %%
-
-
-
